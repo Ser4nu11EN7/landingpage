@@ -127,15 +127,37 @@ const ContactIcons = ({ variant }: { variant: Variant }) => {
   );
 };
 
+// --- Starfield Background Component ---
+const Starfield = ({ opacity = 0.5 }: { opacity?: number }) => (
+  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="absolute inset-0" style={{
+      backgroundImage: 'radial-gradient(1px 1px at 10% 10%, white, transparent), radial-gradient(1.5px 1.5px at 20% 30%, white, transparent), radial-gradient(2px 2px at 40% 70%, white, transparent), radial-gradient(1px 1px at 60% 20%, white, transparent), radial-gradient(1.5px 1.5px at 80% 80%, white, transparent), radial-gradient(2px 2px at 90% 40%, white, transparent)',
+      backgroundSize: '200px 200px',
+      opacity: opacity
+    }}></div>
+    <div className="absolute inset-0" style={{
+      backgroundImage: 'radial-gradient(1px 1px at 30% 50%, white, transparent), radial-gradient(2px 2px at 70% 10%, white, transparent), radial-gradient(1.5px 1.5px at 50% 90%, white, transparent), radial-gradient(1px 1px at 15% 80%, white, transparent)',
+      backgroundSize: '350px 350px',
+      opacity: opacity * 0.8
+    }}></div>
+    <div className="absolute inset-0" style={{
+      backgroundImage: 'radial-gradient(2px 2px at 50% 50%, white, transparent), radial-gradient(1px 1px at 80% 20%, white, transparent), radial-gradient(1.5px 1.5px at 20% 80%, white, transparent)',
+      backgroundSize: '500px 500px',
+      opacity: opacity * 0.6
+    }}></div>
+  </div>
+);
+
 // --- Design 1: Dark Premium ---
 const DarkPremium = () => (
-  <div className="min-h-screen bg-[#050505] text-white flex flex-col">
+  <div className="min-h-screen bg-[#02040A] text-white flex flex-col relative">
+    <Starfield opacity={0.6} />
     <SharedHeader theme="dark" />
     <main className="relative flex-grow flex flex-col items-center justify-center px-4 text-center overflow-hidden">
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center flex-col">
-        <div className="absolute w-[1000px] h-[500px] bg-[#1a2332] opacity-30 blur-[120px] rounded-full"></div>
+        <div className="absolute w-[1000px] h-[500px] bg-[#1e1b4b] opacity-40 blur-[120px] rounded-full"></div>
         <div className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-white to-transparent opacity-10 blur-[2px]"></div>
-        <div className="absolute w-full h-[60px] bg-gradient-to-r from-transparent via-[#4a6b9c] to-transparent opacity-10 blur-[30px]"></div>
+        <div className="absolute w-full h-[60px] bg-gradient-to-r from-transparent via-[#172554] to-transparent opacity-30 blur-[40px]"></div>
       </div>
       <div className="relative z-10 flex flex-col items-center max-w-[900px] mx-auto -translate-y-8">
         <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} className="mb-10">
@@ -205,9 +227,11 @@ const ModernFintech = () => (
 
 // --- Design 4: Wealth Management ---
 const WealthManagement = () => (
-  <div className="min-h-screen bg-[#0B1014] text-[#E5E7EB] flex flex-col">
+  <div className="min-h-screen bg-[#05070C] text-[#E5E7EB] flex flex-col relative">
+    <Starfield opacity={0.4} />
+    <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#D4AF37] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
     <SharedHeader theme="dark" />
-    <main className="flex-grow flex flex-col items-center justify-center px-4 text-center">
+    <main className="flex-grow flex flex-col items-center justify-center px-4 text-center relative z-10">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="max-w-3xl mx-auto flex flex-col items-center">
         <div className="mb-10">
           <BrandLogo size="large" withBorder />
@@ -252,7 +276,9 @@ const SwissMinimal = () => (
 
 // --- Design 6: Carbon Executive (New) ---
 const CarbonExecutive = () => (
-  <div className="min-h-screen bg-[#09090B] text-zinc-100 flex flex-col">
+  <div className="min-h-screen bg-[#030508] text-zinc-100 flex flex-col relative">
+    <Starfield opacity={0.3} />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#38bdf8] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
     <SharedHeader theme="dark" />
     <main className="flex-grow flex flex-col items-center justify-center px-4 text-center relative z-10">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl mx-auto flex flex-col items-center">
@@ -275,7 +301,8 @@ const CarbonExecutive = () => (
 
 // --- Design 7: Obsidian Edge ---
 const ObsidianEdge = () => (
-  <div className="min-h-screen bg-black text-white flex flex-col">
+  <div className="min-h-screen bg-black text-white flex flex-col relative">
+    <Starfield opacity={0.5} />
     <SharedHeader theme="dark" />
     <main className="flex-grow flex flex-col justify-center px-6 md:px-16 relative z-10">
       <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="max-w-5xl w-full mx-auto border-l-4 border-white pl-8 md:pl-12 py-4">
@@ -310,7 +337,7 @@ export default function App() {
   ];
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-[#050505]">
+    <div className="relative w-full min-h-screen overflow-hidden bg-[#02040A]">
       <AnimatePresence mode="wait">
         {activeTab === 0 && <motion.div key="0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="absolute inset-0 w-full h-full"><DarkPremium /></motion.div>}
         {activeTab === 1 && <motion.div key="1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="absolute inset-0 w-full h-full"><EditorialLight /></motion.div>}
